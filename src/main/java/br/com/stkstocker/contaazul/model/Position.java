@@ -25,20 +25,34 @@ public class Position {
 		return direction;
 	}
 	
-	protected void moveFoward(){
+	protected void moveFoward(Terrain t) throws Exception{
+		int x = axisX;
+		int y = axisY;
 		switch(direction){
 		case 'N':
-			axisY += 1;
+			y += 1;
 			break;
 		case 'W':
-			axisX -= 1;
+			x -= 1;
 			break;
 		case 'S':
-			axisY -= 1;
+			y -= 1;
 			break;
 		case 'E':
-			axisX += 1;
+			x += 1;
 			break;
+		}
+		validateTerrain(x,y,t);
+		axisX = x;
+		axisY = y;
+	}
+
+	public void validateTerrain(int x, int y, Terrain t) throws Exception{
+		if( x >= t.getWidth() 
+				|| y >= t.getHeight() 
+				|| x < 0 
+				|| y < 0 ){
+			throw new Exception("Cannot leave the area");
 		}
 	}
 	

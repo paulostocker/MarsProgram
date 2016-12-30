@@ -6,6 +6,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import br.com.stkstocker.contaazul.model.Robot;
 
+/*
+ * WebService methods
+ * @Author: Paulo Stocker
+ */
+
 @Path("/")
 public class MarsProgramService {
 	
@@ -17,9 +22,12 @@ public class MarsProgramService {
 		
 		entry = entry.toUpperCase();
 		
-		if (entry.matches("[LRM]+")) { // Aceitos apenas os caracteres LRM
+		// Accept only LRM characters
+		if (entry.matches("[LRM]+")) {
 			try{
-				if( robot.validatePosition(entry.toCharArray()) ){ // Envia a entrada para validação
+				// Send the entry for validation
+				if( robot.validatePosition(entry.toCharArray()) ){
+					// Return the position and orientation of the Robot
 					return Response.status(200).entity( robot.getCoordinates() ).build();
 				}
 			}catch(Exception ex){

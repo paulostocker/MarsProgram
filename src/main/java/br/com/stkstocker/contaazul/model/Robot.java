@@ -10,12 +10,14 @@ public class Robot {
 		this.terrain = new Terrain(5,5);
 	}
 	
+	/*
+	 * Valida a posição 
+	 */
 	public boolean validatePosition(char[] string) throws Exception{
 		for (char c : string) {
 			switch(c){
 			case 'M':
-				position.moveFoward();
-				validateTerrain();
+				position.moveFoward(terrain);
 				break;
 			case 'L':
 				position.turnLeft();
@@ -24,18 +26,8 @@ public class Robot {
 				position.turnRight();
 				break;
 			}
-			
 		}
 		return true;
-	}
-	
-	public void validateTerrain() throws Exception{
-		if( position.getAxisX() >= terrain.getWidth() 
-				|| position.getAxisY() >= terrain.getHeight() 
-				|| position.getAxisX() < 0 
-				|| position.getAxisY() < 0 ){
-			throw new Exception("Cannot leave the area");
-		}
 	}
 
 	public String getCoordinates(){
